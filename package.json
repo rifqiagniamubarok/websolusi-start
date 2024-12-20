@@ -9,9 +9,13 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@nextui-org/react": "^2.3.6",
+    "classnames": "^2.5.1",
+    "framer-motion": "^11.1.9",
+    "next": "14.2.3",
     "react": "^18",
     "react-dom": "^18",
-    "next": "14.2.3"
+    "react-icons": "^5.2.1"
   },
   "devDependencies": {
     "postcss": "^8",

@@ -1,118 +1,254 @@
-import Image from "next/image";
-import { Inter } from "next/font/google";
-
-const inter = Inter({ subsets: ["latin"] });
+import { Button, Card, Input, Tooltip } from '@nextui-org/react';
+import Image from 'next/image';
+import { FaCheckCircle, FaQuestionCircle } from 'react-icons/fa';
+import { AiTwotoneQuestionCircle } from 'react-icons/ai';
+import { useState } from 'react';
+import BasicLayout from '@/components/layouts/BasicLayout';
 
 export default function Home() {
+  const packages = [
+    {
+      name: 'SMALL',
+      original_price: '50.000',
+      price: '30.000',
+      services: [
+        {
+          name: 'Layanan awal',
+          list: [
+            {
+              name: 'Free domain',
+              q: 'Gratis domain 1 tahun',
+            },
+            {
+              name: 'Free one time setup',
+              q: '',
+            },
+            {
+              name: 'Modern website',
+              q: 'Beri kami contoh website yang anda inginkan dan akan kami buatkan',
+            },
+            {
+              name: '5 pages',
+              q: '',
+            },
+            {
+              name: 'Google Index',
+              q: 'Kami bantu website kamu ke index mesin pencarian google',
+            },
+            {
+              name: 'SEO',
+              q: 'Kami bantu riset dan rekomendasi meta title, meta description dan keyword sesuai website kamu',
+            },
+            {
+              name: '1-2 hari pengerjaan',
+              q: 'Pengerjaan tergantung tingkat kesulitan design website',
+            },
+            {
+              name: '1 Email',
+              q: 'Free 1 email dengan @ nama domain kamu',
+            },
+          ],
+        },
+        {
+          name: 'Maintence',
+          list: [
+            {
+              name: 'Free 1 update/edit page',
+              q: 'Layanan free edit halaman perbulan',
+            },
+            {
+              name: 'Tambahan update/edit page Rp. 25.000',
+              q: 'Layanan edit per page (diluar layanan free edit)',
+            },
+            {
+              name: 'Buat halaman baru Rp 40.000',
+              q: 'Harga layanan design perhalaman baru',
+            },
+          ],
+        },
+        {
+          name: 'Features',
+          list: [
+            {
+              name: 'SSL Security',
+              q: 'Gratis layanan SSL',
+            },
+            {
+              name: 'Unlimited pages',
+              q: 'Jumlah total halaman website',
+            },
+          ],
+        },
+      ],
+    },
+    {
+      name: 'BIG',
+      original_price: '300.000',
+      price: '220.000',
+      services: [
+        {
+          name: 'Layanan awal',
+          list: [
+            {
+              name: 'Free domain',
+              q: 'Gratis domain 1 tahun',
+            },
+            {
+              name: 'Free one time setup',
+              q: '',
+            },
+            {
+              name: 'Modern website',
+              q: 'Beri kami contoh website yang anda inginkan dan akan kami buatkan',
+            },
+            {
+              name: 'Website dinamis',
+              q: 'Website dinamis dengan mengikuti perubahan data',
+            },
+            {
+              name: 'Modern teknologi (Laravel, NodeJS)',
+              q: 'Kami sediakan webiste dengan teknologi terbaru untuk segala kebutuhan',
+            },
+            {
+              name: '20 pages',
+              q: '',
+            },
+            {
+              name: 'Google Index',
+              q: 'Kami bantu website kamu ke index mesin pencarian google',
+            },
+            {
+              name: 'SEO',
+              q: 'Kami bantu riset dan rekomendasi meta title, meta description dan keyword sesuai website kamu',
+            },
+            {
+              name: '5-14 hari pengerjaan',
+              q: 'Pengerjaan tergantung tingkat kesulitan design website',
+            },
+            {
+              name: 'Unlimited Email',
+              q: 'Unlimited email dengan @ nama domain kamu',
+            },
+          ],
+        },
+        {
+          name: 'Maintence',
+          list: [
+            {
+              name: 'Free 1 update/edit page',
+              q: 'Layanan free edit halaman perbulan',
+            },
+            {
+              name: 'Tambahan update/edit page Rp. 50.000',
+              q: 'Layanan edit per page (diluar layanan free edit)',
+            },
+            {
+              name: 'Buat halaman baru Rp 100.000',
+              q: 'Harga layanan design perhalaman baru',
+            },
+          ],
+        },
+        {
+          name: 'Features',
+          list: [
+            {
+              name: 'SSL Security',
+              q: 'Gratis layanan SSL',
+            },
+            {
+              name: 'Unlimited pages',
+              q: 'Jumlah total halaman website',
+            },
+          ],
+        },
+      ],
+    },
+  ];
+
+  const [isDetail, setIsDetail] = useState(false);
   return (
-    <main
-      className={`flex min-h-screen flex-col items-center justify-between p-24 ${inter.className}`}
-    >
-      <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
-        <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
-          Get started by editing&nbsp;
-          <code className="font-mono font-bold">pages/index.js</code>
-        </p>
-        <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:h-auto lg:w-auto lg:bg-none">
-          <a
-            className="pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0"
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{" "}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className="dark:invert"
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
+    <BasicLayout>
+      <section className="w-screen h-screen bg-secondary">
+        <div className="container mx-auto">
+          <div className="grid grid-cols-2 gap-12">
+            <div className="h-screen flex flex-col justify-center gap-4">
+              <div className="h-16 relative ">
+                <Image src={'logo-name.svg'} fill className=" " />
+              </div>
+              <p className="text-4xl font-semibold">
+                Kami Buatkan <br />
+                <span className="text-primary">Website Profesional Termurah</span>
+                <br /> untuk bisnis anda
+              </p>
+              <p className="text-xl">Dapatkan kemudahan membuat website yang kamu inginkan. Website langsung siap pakai</p>
+              <div className="flex gap-4 items-center bg-tertiary p-10 rounded-lg">
+                <Input size="lg" variant="faded" color="df" placeholder="Nama Domain Kamu" className="grow" />
+                <Button color="primary" className="grow-0" size="lg">
+                  CARI DOMAIN
+                </Button>
+              </div>
+            </div>
+            <div>
+              <div className="h-full relative">
+                <Image src={'/board.svg'} fill className="object-contain" />
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
-
-      <div className="relative flex place-items-center before:absolute before:h-[300px] before:w-full sm:before:w-[480px] before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-full sm:after:w-[240px] after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700/10 after:dark:from-sky-900 after:dark:via-[#0141ff]/40 before:lg:h-[360px]">
-        <Image
-          className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
-
-      <div className="mb-32 grid text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-4 lg:text-left">
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Docs{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Find in-depth information about Next.js features and API.
-          </p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Learn{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Learn about Next.js in an interactive course with&nbsp;quizzes!
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Templates{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Discover and deploy boilerplate example Next.js&nbsp;projects.
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Deploy{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50 text-balance`}>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
+      </section>
+      <section className="w-screen bg-tertiary text-white">
+        <div className="container mx-auto py-10">
+          <div className="grid grid-cols-4 gap-4">
+            {packages.map((pckg, index) => (
+              <Card className="px-4 py-8 flex flex-col justify-between" key={index}>
+                <div>
+                  <p className="text-xl text-center font-semibold text-primary">{pckg.name}</p>
+                  <p className="line-through text-center">Rp {pckg.original_price} </p>
+                  <p className="text-primary text-center text-2xl font-semibold">
+                    Rp. {pckg.price} <span className="text-xs text-black">/bln</span>
+                  </p>
+                  <div className="mt-4 space-y-4">
+                    {pckg.services
+                      .filter((_, srv_idx) => (!isDetail ? srv_idx == 0 : srv_idx >= 0))
+                      .map((srvc, srvc_idx) => (
+                        <div key={srvc_idx}>
+                          <p className="text-xl text-gray-600">{srvc.name}</p>
+                          <ul className="space-y-1 mt-2">
+                            {srvc.list.map((list, list_idx) => (
+                              <li className="flex justify-between items-center" key={list_idx}>
+                                <div className="flex items-center gap-2">
+                                  <FaCheckCircle className="text-xl text-green-500 " />
+                                  <p className="">{list.name}</p>
+                                </div>
+                                <div>
+                                  {list.q && (
+                                    <Tooltip content={list.q} color="primary" className="max-w-[200px]">
+                                      <button>
+                                        <FaQuestionCircle />
+                                      </button>
+                                    </Tooltip>
+                                  )}
+                                </div>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      ))}
+                  </div>
+                </div>
+                <Button
+                  className="mt-8"
+                  onClick={() => {
+                    setIsDetail(!isDetail);
+                  }}
+                >
+                  {!isDetail ? 'Fitur lebih lengkap' : 'Ringkasan Fitur'}
+                </Button>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+    </BasicLayout>
   );
 }
